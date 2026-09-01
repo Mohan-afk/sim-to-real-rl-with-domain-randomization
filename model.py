@@ -60,8 +60,37 @@ def sample_physics_config(mass_range, length_range, gravity_range, rng):
         'gravity':gravity
     }
 
-# Step 5 - build_parallel_pendulum_envs (not yet solved)
-# TODO: implement
+# Step 5 - build_parallel_pendulum_envs
+def build_parallel_pendulum_envs(n_envs, mass_range, length_range, gravity_range, seed):
+    """Build parallel Pendulum-v1 envs each with its own sampled physics.
+
+    Args:
+        n_envs: Number of environments to create.
+        mass_range: (min, max) float tuple for pendulum mass.
+        length_range: (min, max) float tuple for rod length.
+        gravity_range: (min, max) float tuple for gravity.
+        seed: Integer seed for the physics-sampling RNG.
+
+    Returns:
+        envs: List of n_envs Gymnasium Pendulum-v1 environments.
+        configs: List of physics dicts with keys 'mass', 'length', 'gravity'.
+    """
+    # TODO: Build n_envs Pendulum envs each with its own sampled physics...
+    rng = np.random.default_rng(seed)
+    envs = []
+    configs = []
+
+    for _ in range(n_envs):
+        config = sample_physics_config(mass_range,length_range,gravity_range,rng)
+        env = gym.make('Pendulum-v1')
+        set_pendulum_mass(env,config['mass'])
+        set_pendulum_length(env, config['length'])
+        set_pendulum_gravity(env, config['gravity'])
+
+        envs.append(env)
+        configs.append(config)
+
+    return envs, configs
 
 # Step 6 - shape_upright_hold_reward (not yet solved)
 # TODO: implement
