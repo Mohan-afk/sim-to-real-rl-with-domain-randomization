@@ -92,8 +92,37 @@ def build_parallel_pendulum_envs(n_envs, mass_range, length_range, gravity_range
 
     return envs, configs
 
-# Step 6 - shape_upright_hold_reward (not yet solved)
-# TODO: implement
+# Step 6 - shape_upright_hold_reward
+def shape_upright_hold_reward(obs, base_reward, action, angle_thresh=0.2, angvel_thresh=0.5, hold_bonus=1.0):
+    """Shape reward with a bonus for holding the pendulum upright and still.
+
+    Args:
+        obs: np.ndarray of shape (3,) or (n, 3) as [cos(theta), sin(theta), theta_dot].
+        base_reward: float or np.ndarray of shape (n,) from the environment.
+        action: float or np.ndarray (accepted for wrapper compatibility).
+        angle_thresh: max absolute angle from upright to count as upright.
+        angvel_thresh: max absolute angular velocity to count as still.
+        hold_bonus: extra reward added when upright and still.
+
+    Returns:
+        Shaped reward with the same shape as base_reward.
+    """
+    # TODO: Add hold_bonus when upright and still; else return base_reward
+
+    obs_arr = np.asarray(obs, dtype=float)
+
+    sin_theta = obs_arr[...,1]
+    cos_theta = obs_arr[...,0]
+    theta_dot = obs_arr[...,2]
+
+    theta = np.arctan2(sin_theta,cos_theta)
+    threshold = (np.abs(theta)<angle_thresh) & (np.abs(theta_dot)<angvel_thresh)
+    shaped_reward = base_reward + hold_bonus*threshold.astype(float)
+
+    if np.isscalar(base_reward) or isinstance(base_reward,(float,int)):
+        return float(shaped_reward)
+    
+    return shaped_reward
 
 # Step 7 - build_actor_network (not yet solved)
 # TODO: implement

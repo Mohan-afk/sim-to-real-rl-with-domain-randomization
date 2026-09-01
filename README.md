@@ -15,7 +15,7 @@ python scaffold.py
 - [x] **3.** set_pendulum_gravity
 - [x] **4.** sample_physics_config
 - [x] **5.** build_parallel_pendulum_envs
-- [ ] **6.** shape_upright_hold_reward
+- [x] **6.** shape_upright_hold_reward
 - [ ] **7.** build_actor_network
 - [ ] **8.** build_critic_network
 - [ ] **9.** sample_action_log_prob_entropy
