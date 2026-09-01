@@ -36,8 +36,29 @@ def set_pendulum_gravity(env, gravity):
     env.unwrapped.g = gravity
     return env
 
-# Step 4 - sample_physics_config (not yet solved)
-# TODO: implement
+# Step 4 - sample_physics_config
+def sample_physics_config(mass_range, length_range, gravity_range, rng):
+    """Sample a physics config (mass, length, gravity) uniformly from ranges.
+
+    Args:
+        mass_range: (min, max) float tuple for pendulum mass.
+        length_range: (min, max) float tuple for rod length.
+        gravity_range: (min, max) float tuple for gravity.
+        rng: numpy.random.Generator used for all sampling.
+
+    Returns:
+        Dict with keys 'mass', 'length', 'gravity' (floats).
+    """
+    # TODO: Sample a physics configuration from given min/max ranges\
+    mass = float(rng.uniform(mass_range[0],mass_range[1]))
+    length = float(rng.uniform(length_range[0],length_range[1]))
+    gravity = float(rng.uniform(gravity_range[0],gravity_range[1]))
+
+    return {
+        'mass':mass,
+        'length':length,
+        'gravity':gravity
+    }
 
 # Step 5 - build_parallel_pendulum_envs (not yet solved)
 # TODO: implement
