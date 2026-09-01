@@ -11,7 +11,7 @@ python scaffold.py
 ## Steps
 
 - [x] **1.** set_pendulum_mass
-- [ ] **2.** set_pendulum_length
+- [x] **2.** set_pendulum_length
 - [ ] **3.** set_pendulum_gravity
 - [ ] **4.** sample_physics_config
 - [ ] **5.** build_parallel_pendulum_envs
