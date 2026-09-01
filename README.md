@@ -12,7 +12,7 @@ python scaffold.py
 
 - [x] **1.** set_pendulum_mass
 - [x] **2.** set_pendulum_length
-- [ ] **3.** set_pendulum_gravity
+- [x] **3.** set_pendulum_gravity
 - [ ] **4.** sample_physics_config
 - [ ] **5.** build_parallel_pendulum_envs
 - [ ] **6.** shape_upright_hold_reward

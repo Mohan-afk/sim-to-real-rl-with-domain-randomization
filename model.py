@@ -29,8 +29,12 @@ def set_pendulum_length(env, length):
     env.unwrapped.l = length  
     return env
 
-# Step 3 - set_pendulum_gravity (not yet solved)
-# TODO: implement
+# Step 3 - set_pendulum_gravity
+def set_pendulum_gravity(env, gravity):
+    """Set a Pendulum environment's gravity physics parameter to a given value."""
+    # TODO: Update the env's unwrapped gravity in-place and return env
+    env.unwrapped.g = gravity
+    return env
 
 # Step 4 - sample_physics_config (not yet solved)
 # TODO: implement
