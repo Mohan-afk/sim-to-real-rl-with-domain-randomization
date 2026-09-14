@@ -17,7 +17,7 @@ python scaffold.py
 - [x] **5.** build_parallel_pendulum_envs
 - [x] **6.** shape_upright_hold_reward
 - [x] **7.** build_actor_network
-- [ ] **8.** build_critic_network
+- [x] **8.** build_critic_network
 - [ ] **9.** sample_action_log_prob_entropy
 - [ ] **10.** collect_rollout
 - [ ] **11.** rollout_observations

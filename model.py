@@ -155,8 +155,18 @@ def build_actor_network(obs_dim, action_dim, hidden_dim=64):
     # with two Tanh hidden layers and std = exp(log_std).
     return GaussianActor(obs_dim, action_dim, hidden_dim)
 
-# Step 8 - build_critic_network (not yet solved)
-# TODO: implement
+# Step 8 - build_critic_network
+import torch
+import torch.nn as nn
+def build_critic_network(obs_dim, hidden_dim=64):
+    # TODO: Build a critic network that maps an observation to a single state-value estimate.
+    return nn.Sequential(
+        nn.Linear(obs_dim,hidden_dim),
+        nn.Tanh(),
+        nn.Linear(hidden_dim,hidden_dim),
+        nn.Tanh(),
+        nn.Linear(hidden_dim, 1)
+    )
 
 # Step 9 - sample_action_log_prob_entropy (not yet solved)
 # TODO: implement
