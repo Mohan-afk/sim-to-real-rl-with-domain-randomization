@@ -168,8 +168,32 @@ def build_critic_network(obs_dim, hidden_dim=64):
         nn.Linear(hidden_dim, 1)
     )
 
-# Step 9 - sample_action_log_prob_entropy (not yet solved)
-# TODO: implement
+# Step 9 - sample_action_log_prob_entropy
+import torch
+import torch.nn as nn 
+from torch.distributions import Normal
+def sample_action_log_prob_entropy(actor, obs, deterministic=False):
+    """Sample actions from the Gaussian policy; return (actions, log_probs, entropy).
+
+    Use the actor's mean output and its learnable `log_std` parameter
+    (std = exp(actor.log_std)). Sum log-probs and entropy over action dims.
+    """
+    # TODO: Build a Normal(mean, std), take the mean when deterministic=True
+    # (otherwise sample), and return actions, summed log-probs, and entropy.
+    actor_out = actor(obs)
+    mean = actor_out[0] if isinstance(actor_out, tuple) else actor_out
+
+    std = torch.exp(actor.log_std)
+    dist = Normal(mean, std)
+    
+    if deterministic:
+        actions = mean
+    else:
+        actions = dist.sample()
+    
+    log_probs = dist.log_prob(actions).sum(dim = -1)
+    entropy = dist.entropy().sum(dim=-1)
+    return actions, log_probs, entropy
 
 # Step 10 - collect_rollout (not yet solved)
 # TODO: implement

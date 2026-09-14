@@ -18,7 +18,7 @@ python scaffold.py
 - [x] **6.** shape_upright_hold_reward
 - [x] **7.** build_actor_network
 - [x] **8.** build_critic_network
-- [ ] **9.** sample_action_log_prob_entropy
+- [x] **9.** sample_action_log_prob_entropy
 - [ ] **10.** collect_rollout
 - [ ] **11.** rollout_observations
 - [ ] **12.** rollout_actions
