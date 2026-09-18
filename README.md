@@ -19,25 +19,22 @@ python scaffold.py
 - [x] **7.** build_actor_network
 - [x] **8.** build_critic_network
 - [x] **9.** sample_action_log_prob_entropy
-- [ ] **10.** collect_rollout
-- [ ] **11.** rollout_observations
-- [ ] **12.** rollout_actions
-- [ ] **13.** rollout_rewards
-- [ ] **14.** rollout_dones
-- [ ] **15.** rollout_values
-- [ ] **16.** rollout_log_probs
-- [ ] **17.** compute_gae
-- [ ] **18.** normalize_advantages
-- [ ] **19.** clipped_surrogate_objective
-- [ ] **20.** value_loss_and_entropy_bonus
-- [ ] **21.** ppo_loss
-- [ ] **22.** ppo_update_epoch
-- [ ] **23.** train_ppo
-- [ ] **24.** resample_envs_physics
-- [ ] **25.** evaluate_fixed_physics
-- [ ] **26.** measure_generalization_gap
-- [ ] **27.** sweep_physics_parameter
-- [ ] **28.** compare_dr_vs_fixed_policy
+- [x] **10.** collect_rollout
+- [x] **11.** rollout_observations
+- [x] **12.** rollout_actions
+- [x] **13.** rollout_rewards
+- [x] **14.** rollout_dones
+- [x] **15.** rollout_values
+- [x] **16.** rollout_log_probs
+- [x] **17.** compute_gae
+- [x] **18.** normalize_advantages
+- [x] **19.** clipped_surrogate_objective
+- [x] **20.** value_loss_and_entropy_bonus
+- [x] **21.** ppo_loss
+- [x] **22.** ppo_update_epoch
+- [x] **23.** train_ppo
+- [x] **24.** resample_envs_physics
+- [x] **25.** evaluate_fixed_physics
 
 ---
 
