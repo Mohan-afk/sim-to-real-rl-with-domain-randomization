@@ -35,6 +35,7 @@ python scaffold.py
 - [x] **23.** train_ppo
 - [x] **24.** resample_envs_physics
 - [x] **25.** evaluate_fixed_physics
+- [x] **26.** measure_generalization_gap
 
 ---
 

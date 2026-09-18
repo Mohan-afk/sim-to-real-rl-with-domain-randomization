@@ -706,3 +706,46 @@ def evaluate_fixed_physics(actor, mass, length, gravity, n_episodes=5, seed=0, m
     
     return float(sum(total_reward))/len(total_reward)
 
+# Step 26 - measure_generalization_gap
+def measure_generalization_gap(actor, train_ranges, heldout_ranges, n_configs=5, n_episodes=3, seed=0):
+    """Measure in-dist vs held-out returns and the generalization gap.
+
+    Args:
+        actor: Trained actor network (Gaussian policy).
+        train_ranges: Dict with keys 'mass', 'length', 'gravity' -> (min, max).
+        heldout_ranges: Same structure as train_ranges, held-out box.
+        n_configs: Number of physics configs to sample per side.
+        n_episodes: Episodes per config for evaluate_fixed_physics.
+        seed: Seed for config sampling and evaluation.
+
+    Returns:
+        Dict with float keys 'in_dist_return', 'heldout_return', 'gap'
+        where gap = in_dist_return - heldout_return.
+    """
+    # TODO: Quantify generalization gap between in-dist and held-out physics
+    rng = np.random.default_rng(seed)
+
+    in_dist_returns = []
+    for _ in range(n_configs):
+        cfg = sample_physics_config(train_ranges['mass'],
+        train_ranges['length'],train_ranges['gravity'],rng)
+
+        ret = evaluate_fixed_physics(actor,cfg['mass'],cfg['length'],cfg['gravity'],n_episodes,seed)
+        in_dist_returns.append(ret)
+    
+    heldout_reuturns = []
+    for _ in range(n_configs):
+        cfg = sample_physics_config(heldout_ranges['mass'],heldout_ranges['length'],heldout_ranges['gravity'],rng)
+
+        ret = evaluate_fixed_physics(actor, cfg['mass'],cfg['length'],cfg['gravity'],n_episodes,seed)
+        heldout_reuturns.append(ret)
+    
+    in_dist_mean = float(np.mean(in_dist_returns))
+    heldout_mean = float(np.mean(heldout_reuturns))
+
+    gap = float(in_dist_mean - heldout_mean)
+
+    return {
+        'gap': gap, 'heldout_return': heldout_mean, 'in_dist_return': in_dist_mean,
+    }
+
