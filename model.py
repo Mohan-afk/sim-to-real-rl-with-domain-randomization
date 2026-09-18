@@ -784,3 +784,52 @@ def sweep_physics_parameter(actor, param_name, param_values, base_mass=1.0, base
     
     return results
 
+# Step 28 - compare_dr_vs_fixed_policy
+def compare_dr_vs_fixed_policy(dr_actor, fixed_actor, heldout_configs, n_episodes=3, seed=0):
+    """Compare DR-trained vs fixed-physics policies on held-out configs.
+
+    Args:
+        dr_actor: Actor trained with domain randomization.
+        fixed_actor: Actor trained on fixed physics.
+        heldout_configs: List of dicts with keys 'mass', 'length', 'gravity'.
+        n_episodes: Episodes per config for evaluate_fixed_physics.
+        seed: Base seed passed to each evaluation.
+
+    Returns:
+        Dict with keys dr_returns, fixed_returns, dr_mean, fixed_mean,
+        dr_advantage (dr_mean - fixed_mean).
+    """
+    # TODO: Compare DR and fixed-physics policies on held-out configs...
+    dr_returns = []
+    fixed_returns = []
+
+    for cfg in heldout_configs:
+        mass = cfg['mass']
+        length = cfg['length']
+        gravity = cfg['gravity']
+
+        ret_dr = evaluate_fixed_physics(dr_actor,mass,length,gravity,n_episodes,seed)
+
+        dr_returns.append(float(ret_dr))
+
+        ret_fixed = evaluate_fixed_physics(fixed_actor,mass,length,gravity,n_episodes,seed)
+
+        fixed_returns.append(float(ret_fixed))
+    
+    if len(heldout_configs) == 0:
+        dr_mean = 0.0
+        fixed_mean = 0.0
+    else:
+        dr_mean = float(sum(dr_returns))/float(len(dr_returns))
+        fixed_mean = float(sum(fixed_returns))/float(len(fixed_returns))
+    
+    dr_advantage = float(dr_mean - fixed_mean)
+
+    return {
+        'dr_returns': dr_returns,
+        'fixed_returns': fixed_returns,
+        'dr_mean': dr_mean,
+        'fixed_mean': fixed_mean,
+        'dr_advantage': dr_advantage,
+    }
+
