@@ -749,3 +749,38 @@ def measure_generalization_gap(actor, train_ranges, heldout_ranges, n_configs=5,
         'gap': gap, 'heldout_return': heldout_mean, 'in_dist_return': in_dist_mean,
     }
 
+# Step 27 - sweep_physics_parameter
+def sweep_physics_parameter(actor, param_name, param_values, base_mass=1.0, base_length=1.0, base_gravity=10.0, n_episodes=3, seed=0):
+    """Sweep one physics parameter and report mean return at each value.
+
+    Args:
+        actor: Trained actor network (Gaussian policy).
+        param_name: One of 'mass', 'length', or 'gravity'.
+        param_values: Sequence of floats to assign to the chosen parameter.
+        base_mass: Mass used when not sweeping mass.
+        base_length: Length used when not sweeping length.
+        base_gravity: Gravity used when not sweeping gravity.
+        n_episodes: Number of evaluation episodes per configuration.
+        seed: Base seed forwarded to each evaluation.
+
+    Returns:
+        List of dicts [{'param_value': float, 'mean_return': float}, ...]
+        in the same order as param_values.
+    """
+    # TODO: Evaluate a policy across a range of one physics parameter
+    results = []
+
+    for val in param_values:
+        mass = float(val) if param_name == 'mass' else float(base_mass)
+        length = float(val) if param_name == 'length' else float(base_length)
+        gravity = float(val) if param_name == 'gravity' else float(base_gravity)
+
+        mean_ret = evaluate_fixed_physics(actor,mass,length,gravity,n_episodes,seed)
+
+        results.append({
+            'param_value': float(val),
+            'mean_return': float(mean_ret),
+        })
+    
+    return results
+
